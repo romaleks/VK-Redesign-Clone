@@ -7,7 +7,7 @@ const ContentItem = ({ title, subtitle, image, tick }) => {
       <div className='flex flex-col'>
         <div className='flex items-center gap-1'>
           <h3 className='lea font-bold'>{title}</h3>
-          <img src={tick} alt='verified' className='h-4' />
+          {tick ? <img src={tick} alt='verified' className='h-4' /> : ''}
         </div>
         <span className='text-sm font-semibold text-gray-400'>{subtitle}</span>
       </div>
