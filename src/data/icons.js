@@ -7,6 +7,7 @@ import videos from '../assets/svgs/videos.svg'
 import photos from '../assets/svgs/photos.svg'
 import info from '../assets/svgs/info.svg'
 import settings from '../assets/svgs/settings.svg'
+import messages from '../assets/svgs/messages.svg'
 
 export default {
   profile,
@@ -18,4 +19,5 @@ export default {
   photos,
   info,
   settings,
+  messages,
 }

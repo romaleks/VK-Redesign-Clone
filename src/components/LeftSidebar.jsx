@@ -2,9 +2,9 @@ import DropdownButton from './ui/DropdownBtn'
 import ContentItem from './ui/ContentItem'
 import SectionItem from './ui/SectionItem'
 
-const Sidebar = () => {
+const LeftSidebar = () => {
   return (
-    <div className='flex w-60 flex-col gap-4'>
+    <div className='flex basis-60 flex-col gap-4'>
       <DropdownButton />
       <div className='overflow-hidden rounded-lg bg-gray-100'>
         <ContentItem title='John Lenon' subtitle='Hello, how are you?' />
@@ -27,4 +27,4 @@ const Sidebar = () => {
   )
 }
 
-export default Sidebar
+export default LeftSidebar
