@@ -2,16 +2,17 @@ import ReactionBtn from '../../components/ui/ReactionBtn'
 import like from '../../assets/svgs/like.svg'
 import comment from '../../assets/svgs/comment.svg'
 import share from '../../assets/svgs/share.svg'
+import logos from '../../data/logos'
 
-const Post = () => {
+const Post = ({ source }) => {
   return (
     <div className='flex flex-col gap-4 rounded-lg border border-gray-300 p-6'>
       <div className='flex gap-3'>
-        <div className='h-12 w-12 rounded-full bg-gray-300'>
-          <img src='' alt='' />
+        <div className='h-12 w-12 rounded-full border border-gray-300 p-1.5'>
+          <img src={logos[source]} alt='logo' />
         </div>
         <div className='leading-3'>
-          <h2 className='text-xl font-bold'>Tesla Inc.</h2>
+          <h2 className='text-xl font-bold'>{source}</h2>
           <span className='font-medium text-gray-400'>5 minutes ago</span>
         </div>
       </div>
@@ -23,10 +24,10 @@ const Post = () => {
           iusto qui.
         </p>
         <div className='grid h-96 grid-cols-3 grid-rows-5 gap-4'>
-          <div className='col-span-2 row-span-full rounded-lg bg-gray-300'></div>
-          <div className='row-span-2 rounded-lg bg-gray-300'></div>
-          <div className='row-span-2 rounded-lg bg-gray-300'></div>
-          <div className='rounded-lg bg-gray-300'></div>
+          <div className='col-span-2 row-span-full rounded-lg bg-gray-200'></div>
+          <div className='row-span-2 rounded-lg bg-gray-200'></div>
+          <div className='row-span-2 rounded-lg bg-gray-200'></div>
+          <div className='rounded-lg bg-gray-200'></div>
         </div>
       </div>
       <div className='flex gap-3'>

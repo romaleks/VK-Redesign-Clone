@@ -6,7 +6,7 @@ import fire from '../assets/svgs/fire.svg'
 
 const RightSidebar = () => {
   return (
-    <div className='flex basis-60 flex-col gap-4'>
+    <div className='sticky top-4 flex basis-60 flex-col gap-4'>
       <div className='overflow-hidden rounded-lg bg-gray-100'>
         <ContentItem title='Tesla Inc.' subtitle='2 new post' tick={tick} />
         <ContentItem title='Apple' subtitle='1 new post' tick={tick} />

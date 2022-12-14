@@ -1,16 +1,37 @@
 import DropdownButton from './ui/DropdownBtn'
 import ContentItem from './ui/ContentItem'
 import SectionItem from './ui/SectionItem'
+import avatar from '../assets/svgs/avatar.svg'
 
 const LeftSidebar = () => {
   return (
-    <div className='flex basis-60 flex-col gap-4'>
-      <DropdownButton />
+    <div className='sticky top-4 flex basis-60 flex-col gap-4 overflow-y-auto'>
+      <DropdownButton image={avatar} />
       <div className='overflow-hidden rounded-lg bg-gray-100'>
-        <ContentItem title='John Lenon' subtitle='Hello, how are you?' />
-        <ContentItem title='John Lenon' subtitle='Hello, how are you?' />
-        <ContentItem title='John Lenon' subtitle='Hello, how are you?' />
-        <ContentItem title='John Lenon' subtitle='Hello, how are you?' />
+        <ContentItem
+          title='John Lenon'
+          subtitle='Hello, how are you?'
+          image={avatar}
+          isPerson={true}
+        />
+        <ContentItem
+          title='John Lenon'
+          subtitle='Hello, how are you?'
+          image={avatar}
+          isPerson={true}
+        />
+        <ContentItem
+          title='John Lenon'
+          subtitle='Hello, how are you?'
+          image={avatar}
+          isPerson={true}
+        />
+        <ContentItem
+          title='John Lenon'
+          subtitle='Hello, how are you?'
+          image={avatar}
+          isPerson={true}
+        />
         <div className='h-px w-full bg-gray-300'></div>
         <SectionItem title='Messages' />
       </div>

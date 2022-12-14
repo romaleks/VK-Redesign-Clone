@@ -36,22 +36,22 @@ const items = [
   },
 ]
 
-const DropdownButton = () => (
+const DropdownButton = ({ image }) => (
   <Dropdown
     menu={{
       items,
     }}
     trigger='click'
-    className='flex cursor-pointer items-center justify-between rounded-lg bg-gray-100 px-4 py-2 font-semibold duration-75 hover:bg-gray-200'
+    className='flex cursor-pointer items-center justify-between rounded-lg bg-gray-100 px-4 py-2 duration-75 hover:bg-gray-200'
   >
     <a onClick={e => e.preventDefault()}>
       <div className='flex items-center gap-2'>
         <img
-          src=''
+          src={image}
           alt='avatar'
           className='h-10 w-10 rounded-full bg-gray-300'
         />
-        IDDna
+        <span className='font-bold'>IDDna</span>
       </div>
       <img src={arrow} alt='open' className='h-5' />
     </a>
