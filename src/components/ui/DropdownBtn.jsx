@@ -1,9 +1,6 @@
 import React from 'react'
 import { Dropdown } from 'antd'
-import arrow from '../../assets/svgs/arrow.svg'
-import profile from '../../assets/svgs/profile.svg'
-import settings from '../../assets/svgs/settings.svg'
-import info from '../../assets/svgs/info.svg'
+import icons from '../../data/icons'
 const items = [
   {
     key: '1',
@@ -12,7 +9,7 @@ const items = [
         <span className='text-base font-semibold'>Profile</span>
       </a>
     ),
-    icon: <img src={profile} alt='profile' className='h-8' />,
+    icon: <img src={icons.profile} alt='profile' className='h-8' />,
   },
   {
     key: '2',
@@ -21,7 +18,7 @@ const items = [
         <span className='text-base font-semibold'>Settings</span>
       </a>
     ),
-    icon: <img src={settings} alt='profile' className='h-8' />,
+    icon: <img src={icons.settings} alt='profile' className='h-8' />,
     disabled: true,
   },
   {
@@ -31,7 +28,7 @@ const items = [
         <span className='text-base font-semibold'>Info</span>
       </a>
     ),
-    icon: <img src={info} alt='profile' className='h-8' />,
+    icon: <img src={icons.info} alt='profile' className='h-8' />,
     disabled: true,
   },
 ]
@@ -53,7 +50,7 @@ const DropdownButton = ({ image }) => (
         />
         <span className='font-bold'>IDDna</span>
       </div>
-      <img src={arrow} alt='open' className='h-5' />
+      <img src={icons.arrow} alt='open' className='h-5' />
     </a>
   </Dropdown>
 )

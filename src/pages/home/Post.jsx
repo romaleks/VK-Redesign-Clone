@@ -1,7 +1,4 @@
 import ReactionBtn from '../../components/ui/ReactionBtn'
-import like from '../../assets/svgs/like.svg'
-import comment from '../../assets/svgs/comment.svg'
-import share from '../../assets/svgs/share.svg'
 import icons from '../../data/icons'
 import logos from '../../data/logos'
 
@@ -37,9 +34,9 @@ const Post = ({ source, verified }) => {
         </div>
       </div>
       <div className='flex gap-3'>
-        <ReactionBtn icon={like} />
-        <ReactionBtn icon={comment} />
-        <ReactionBtn icon={share} />
+        <ReactionBtn icon='like' />
+        <ReactionBtn icon='comment' />
+        <ReactionBtn icon='share' />
       </div>
     </div>
   )

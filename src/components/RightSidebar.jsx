@@ -1,19 +1,18 @@
 import React from 'react'
 import ContentItem from './ui/ContentItem'
-import tick from '../assets/svgs/tick.svg'
 import ToggleButton from './ui/ToggleButton'
-import fire from '../assets/svgs/fire.svg'
+import logos from '../data/logos'
 
 const RightSidebar = () => {
   return (
     <div className='sticky top-4 flex basis-60 flex-col gap-4'>
       <div className='overflow-hidden rounded-lg bg-gray-100'>
-        <ContentItem title='Tesla Inc.' subtitle='2 new post' tick={tick} />
-        <ContentItem title='Apple' subtitle='1 new post' tick={tick} />
-        <ContentItem title='Amazon' tick={tick} />
-        <ContentItem title='BBC' tick={tick} />
+        <ContentItem title='Tesla Inc.' subtitle='2 new post' verified={true} />
+        <ContentItem title='Apple' subtitle='1 new post' verified={true} />
+        <ContentItem title='Amazon' verified={true} />
+        <ContentItem title='BBC' verified={true} />
       </div>
-      <ToggleButton title='By relevance' icon={fire} />
+      <ToggleButton title='By relevance' icon={logos.fire} />
     </div>
   )
 }

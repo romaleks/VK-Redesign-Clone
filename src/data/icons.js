@@ -9,6 +9,12 @@ import info from '../assets/svgs/info.svg'
 import settings from '../assets/svgs/settings.svg'
 import messages from '../assets/svgs/messages.svg'
 import tick from '../assets/svgs/tick.svg'
+import arrow from '../assets/svgs/arrow.svg'
+import bell from '../assets/svgs/bell.svg'
+import comment from '../assets/svgs/comment.svg'
+import fire from '../assets/svgs/fire.svg'
+import like from '../assets/svgs/like.svg'
+import share from '../assets/svgs/share.svg'
 
 export default {
   profile,
@@ -22,4 +28,10 @@ export default {
   settings,
   messages,
   tick,
+  arrow,
+  bell,
+  comment,
+  fire,
+  like,
+  share,
 }
