@@ -2,9 +2,10 @@ import ReactionBtn from '../../components/ui/ReactionBtn'
 import like from '../../assets/svgs/like.svg'
 import comment from '../../assets/svgs/comment.svg'
 import share from '../../assets/svgs/share.svg'
+import icons from '../../data/icons'
 import logos from '../../data/logos'
 
-const Post = ({ source }) => {
+const Post = ({ source, verified }) => {
   return (
     <div className='flex flex-col gap-4 rounded-lg border border-gray-300 p-6'>
       <div className='flex gap-3'>
@@ -12,7 +13,12 @@ const Post = ({ source }) => {
           <img src={logos[source]} alt='logo' />
         </div>
         <div className='leading-3'>
-          <h2 className='text-xl font-bold'>{source}</h2>
+          <div className='flex items-center gap-1.5'>
+            <h2 className='text-xl font-bold'>{source}</h2>
+            {verified ? (
+              <img src={icons.tick} alt='verified' className='h-6' />
+            ) : null}
+          </div>
           <span className='font-medium text-gray-400'>5 minutes ago</span>
         </div>
       </div>

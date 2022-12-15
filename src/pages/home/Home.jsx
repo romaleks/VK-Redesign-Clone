@@ -9,9 +9,9 @@ const Home = () => {
       <LeftSidebar />
       <div className='flex flex-1 flex-col gap-4'>
         <PostForm />
-        <Post source='Tesla Inc.' />
-        <Post source='BBC' />
-        <Post source='Amazon' />
+        <Post source='Tesla Inc.' verified={true} />
+        <Post source='BBC' verified={true} />
+        <Post source='Amazon' verified={true} />
       </div>
       <RightSidebar />
     </div>
