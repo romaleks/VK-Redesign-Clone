@@ -1,7 +1,7 @@
 import React from 'react'
 import ContentItem from './ui/ContentItem'
 import ToggleButton from './ui/ToggleButton'
-import logos from '../data/logos'
+import icons from '../data/icons'
 
 const RightSidebar = () => {
   return (
@@ -12,7 +12,7 @@ const RightSidebar = () => {
         <ContentItem title='Amazon' verified={true} />
         <ContentItem title='BBC' verified={true} />
       </div>
-      <ToggleButton title='By relevance' icon={logos.fire} />
+      <ToggleButton title='By relevance' icon={icons.fire} />
     </div>
   )
 }

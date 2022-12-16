@@ -1,11 +1,17 @@
+import { useSelector } from 'react-redux'
+import { selectUser } from '../../redux/user'
 import icons from '../../data/icons'
 
 const PostForm = () => {
+  const user = useSelector(selectUser)
+
   return (
     <div className='flex gap-2 rounded-lg border border-gray-300 px-4 py-2'>
       <input
         type='text'
-        className='flex-1 rounded-full bg-gray-200 px-6 py-1 text-lg font-medium outline-none focus:bg-gray-300'
+        placeholder={`${user.name}, tell us something new...`}
+        className='flex-1 rounded-full bg-gray-200 px-6 py-1 text-lg font-medium outline-none
+        placeholder:text-gray-400 focus:bg-gray-300'
       />
       {['photos', 'videos', 'music'].map((btn, index) => {
         return (
