@@ -3,11 +3,8 @@ import LeftSidebar from '../../components/LeftSidebar'
 import RightSidebar from '../../components/RightSidebar'
 import PostForm from './PostForm'
 import Post from './Post'
-import { signupUser } from '../auth/userAcitons'
-import { useDispatch } from 'react-redux'
 
 const Home = () => {
-  const dispatch = useDispatch()
   return (
     <>
       <Header />
@@ -19,17 +16,6 @@ const Home = () => {
           <Post source='BBC' verified={true} />
           <Post source='Amazon' verified={true} />
         </div>
-        <button
-          onClick={() => {
-            dispatch(
-              signupUser({
-                email: 'romanov1371@gmail.com',
-                password: 'dffsdfk',
-              })
-            )
-          }}
-          className='h-10 w-10'
-        ></button>
         <RightSidebar />
       </div>
     </>
