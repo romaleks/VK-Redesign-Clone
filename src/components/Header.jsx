@@ -1,5 +1,5 @@
-import logo from '../assets/svgs/logo.svg'
 import Notifications from './ui/Notifications'
+import logos from '../data/logos'
 
 const Header = () => {
   return (
@@ -7,7 +7,7 @@ const Header = () => {
       <div className='m-auto flex max-w-7xl items-end justify-between gap-6'>
         <div className='flex basis-60'>
           <div className='inline-block cursor-pointer rounded-xl bg-white p-2'>
-            <img src={logo} alt='' className='h-10' />
+            <img src={logos.vk_b} alt='' className='h-10' />
           </div>
         </div>
         <input

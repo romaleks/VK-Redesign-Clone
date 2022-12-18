@@ -3,6 +3,9 @@ module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      fontFamily: {
+        sans: 'Poppins, Arial, sans-serif',
+      },
       colors: {
         blue: {
           300: '#3c95fb',
