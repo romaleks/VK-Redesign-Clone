@@ -10,7 +10,8 @@ export const signupUser = createAsyncThunk('user/signupUser', async data => {
       data.password
     )
     console.log(response)
+    return response.user
   } catch (err) {
-    throw err.message
+    return err.message
   }
 })

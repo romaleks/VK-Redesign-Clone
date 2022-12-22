@@ -1,11 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { signupUser } from '../pages/auth/userAcitons'
+import { signupUser } from '../pages/auth/userActions'
 
 const initialState = {
   loading: false,
-  userData: null,
   error: null,
   success: null,
+  userData: {
+    email: null,
+    password: null,
+    token: null,
+  },
 }
 
 export const userSlice = createSlice({
@@ -21,10 +25,12 @@ export const userSlice = createSlice({
       .addCase(signupUser.fulfilled, (state, action) => {
         state.loading = false
         state.userData = action.payload
+        console.log(state.userData)
       })
       .addCase(signupUser.rejected, (state, action) => {
         state.loading = false
-        state.error = action.payload
+        console.log(1)
+        state.error = action.error.message
       })
   },
 })

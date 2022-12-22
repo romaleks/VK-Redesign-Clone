@@ -1,4 +1,4 @@
-const Input = ({ type, reference, title }) => {
+const Input = ({ type, reference, title, required }) => {
   return (
     <div className='relative'>
       <input
@@ -7,6 +7,7 @@ const Input = ({ type, reference, title }) => {
         placeholder=' '
         ref={reference}
         className='peer block w-full border-b-2 outline-none'
+        required={required}
       />
       <label
         htmlFor={title}

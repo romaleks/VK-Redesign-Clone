@@ -14,7 +14,7 @@ const Signin = () => {
       <div className='flex flex-1 flex-col p-6'>
         <div className='flex items-center gap-4'>
           <div className='inline-block cursor-pointer rounded-2xl bg-blue-400 p-2'>
-            <img src={logos.vk_w} alt='' className='h-14' />
+            <img src={logos.vk_w} alt='Logo' className='h-14' />
           </div>
           <h1 className='text-5xl font-bold text-blue-400'>VKontakte</h1>
         </div>
@@ -28,8 +28,18 @@ const Signin = () => {
                 Please enter your details.
               </p>
             </div>
-            <Input type='email' reference={emailRef} title='Email' />
-            <Input type='password' reference={passwordRef} title='Password' />
+            <Input
+              type='email'
+              reference={emailRef}
+              title='Email'
+              required={true}
+            />
+            <Input
+              type='password'
+              reference={passwordRef}
+              title='Password'
+              required={true}
+            />
             <div>
               <Checkbox className='font-medium'>Remember for 30 days</Checkbox>
             </div>
