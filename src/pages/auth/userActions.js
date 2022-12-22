@@ -7,7 +7,7 @@ import { auth, database } from '../../firebase/firebase'
 import { ref, set } from 'firebase/database'
 
 export const signupUser = createAsyncThunk('user/signupUser', async data => {
-  const { email, password, firstName, lastName } = data
+  const { email, password, firstName, lastName, navigate } = data
 
   try {
     const response = await createUserWithEmailAndPassword(auth, email, password)
@@ -18,6 +18,7 @@ export const signupUser = createAsyncThunk('user/signupUser', async data => {
       email,
     })
 
+    navigate('/')
     return response.user
   } catch (err) {
     return err.message
@@ -25,11 +26,11 @@ export const signupUser = createAsyncThunk('user/signupUser', async data => {
 })
 
 export const signinUser = createAsyncThunk('user/signupUser', async data => {
-  const { email, password, firstName, lastName } = data
+  const { email, password, navigate } = data
 
   try {
     const response = await signInWithEmailAndPassword(auth, email, password)
-    console.log(response)
+    navigate('/')
     return response.user
   } catch (err) {
     return err.message

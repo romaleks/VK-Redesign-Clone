@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { signinUser } from './userActions'
 import Input from './Input'
 import SubmitBtn from './SubmitBtn'
@@ -11,6 +11,7 @@ const Signin = () => {
   const emailRef = useRef()
   const passwordRef = useRef()
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -18,7 +19,7 @@ const Signin = () => {
     const email = emailRef.current.value
     const password = passwordRef.current.value
 
-    dispatch(signinUser({ email, password }))
+    dispatch(signinUser({ email, password, navigate }))
   }
 
   return (
@@ -63,7 +64,7 @@ const Signin = () => {
               Don't have an account?{' '}
               <Link
                 to='/signup'
-                className='cursor-pointer font-bold text-blue-400'
+                className='cursor-pointer font-bold text-blue-400 hover:underline'
               >
                 Sign up for free
               </Link>

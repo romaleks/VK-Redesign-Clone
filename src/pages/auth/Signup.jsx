@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Input from './Input'
 import SubmitBtn from './SubmitBtn'
 import logos from '../../data/logos'
@@ -12,6 +12,7 @@ const Signup = () => {
   const emailRef = useRef()
   const passwordRef = useRef()
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -21,7 +22,7 @@ const Signup = () => {
     const email = emailRef.current.value
     const password = passwordRef.current.value
 
-    dispatch(signupUser({ firstName, lastName, email, password }))
+    dispatch(signupUser({ firstName, lastName, email, password, navigate }))
   }
 
   return (
@@ -72,7 +73,7 @@ const Signup = () => {
               Already have an account?{' '}
               <Link
                 to='/signin'
-                className='cursor-pointer font-bold text-blue-400'
+                className='cursor-pointer font-bold text-blue-400 hover:underline'
               >
                 Sign in
               </Link>
