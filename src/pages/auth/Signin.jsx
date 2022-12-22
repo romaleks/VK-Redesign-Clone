@@ -1,13 +1,25 @@
 import { useRef } from 'react'
+import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { signinUser } from './userActions'
 import Input from './Input'
 import SubmitBtn from './SubmitBtn'
 import Checkbox from 'antd/es/checkbox/Checkbox'
 import logos from '../../data/logos'
-import { Link } from 'react-router-dom'
 
 const Signin = () => {
   const emailRef = useRef()
   const passwordRef = useRef()
+  const dispatch = useDispatch()
+
+  const handleSubmit = e => {
+    e.preventDefault()
+
+    const email = emailRef.current.value
+    const password = passwordRef.current.value
+
+    dispatch(signinUser({ email, password }))
+  }
 
   return (
     <div className='flex h-screen'>
@@ -19,7 +31,10 @@ const Signin = () => {
           <h1 className='text-5xl font-bold text-blue-400'>VKontakte</h1>
         </div>
         <div className='flex flex-1 items-center'>
-          <form className='m-auto flex w-full max-w-sm flex-col gap-8'>
+          <form
+            onSubmit={handleSubmit}
+            className='m-auto flex w-full max-w-sm flex-col gap-8'
+          >
             <div className='text-center'>
               <h2 className='text-3xl font-bold text-blue-400'>
                 Welcome back!
