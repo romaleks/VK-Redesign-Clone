@@ -18,7 +18,7 @@ export const signupUser = createAsyncThunk('user/signupUser', async data => {
       email,
     })
 
-    navigate('/')
+    navigate('/home')
     return response.user
   } catch (err) {
     return err.message
@@ -30,7 +30,7 @@ export const signinUser = createAsyncThunk('user/signupUser', async data => {
 
   try {
     const response = await signInWithEmailAndPassword(auth, email, password)
-    navigate('/')
+    navigate('/home')
     return response.user
   } catch (err) {
     return err.message
