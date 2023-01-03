@@ -6,12 +6,21 @@ const initialState = {
   error: null,
   success: null,
   userId: null,
+  userData: {
+    email: null,
+    firstName: null,
+    lastName: null,
+  },
 }
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    saveData(state, action) {
+      state.userData = action.payload
+    },
+  },
   extraReducers(builder) {
     builder
       .addMatcher(isAnyOf(signupUser.pending, signinUser.pending), state => {
@@ -36,5 +45,7 @@ export const userSlice = createSlice({
 })
 
 export const selectUser = state => state.user
+
+export const { saveData } = userSlice.actions
 
 export default userSlice.reducer
