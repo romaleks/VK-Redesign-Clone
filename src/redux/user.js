@@ -5,7 +5,7 @@ import { ref, get } from 'firebase/database'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
 const initialState = {
-  loading: false,
+  loading: true,
   error: null,
   success: null,
   userData: {
@@ -29,27 +29,32 @@ export const userSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addMatcher(isAnyOf(signupUser.pending, signinUser.pending), state => {
-        state.loading = true
-        state.error = null
+      .addCase(saveData.fulfilled, (state, action) => {
+        state.loading = false
+        state.userData = action.payload
       })
+      .addMatcher(
+        isAnyOf(signupUser.pending, signinUser.pending, saveData.pending),
+        state => {
+          state.loading = true
+          state.error = null
+        }
+      )
       .addMatcher(
         isAnyOf(signupUser.fulfilled, signinUser.fulfilled),
         (state, action) => {
+          console.log(1)
           state.loading = false
           state.userData.userId = action.payload.uid
         }
       )
       .addMatcher(
-        isAnyOf(signupUser.rejected, signinUser.rejected),
+        isAnyOf(signupUser.rejected, signinUser.rejected, saveData.rejected),
         (state, action) => {
           state.loading = false
           state.error = action.error.message
         }
       )
-      .addMatcher(saveData.fulfilled, (state, action) => {
-        state.userData = action.payload
-      })
   },
 })
 

@@ -8,9 +8,9 @@ import { selectUser, saveData } from '../../redux/user'
 import { useDispatch, useSelector } from 'react-redux'
 import { auth } from '../../firebase/firebase'
 import { onAuthStateChanged } from 'firebase/auth'
+import PostFormLoad from '../../components/loading/PostFormLoad'
 
 const Home = () => {
-  const [render, setRender] = useState(false)
   const dispatch = useDispatch()
   const user = useSelector(selectUser)
 
@@ -23,28 +23,22 @@ const Home = () => {
     })
   }, [])
 
-  useEffect(() => {
-    if (user.userData) {
-      setRender(true)
-    }
-  })
-
-  return render ? (
+  return (
     <>
       <Header />
       <div className='m-auto flex max-w-7xl items-start gap-4 py-6 px-4'>
-        <LeftSidebar />
-        <div className='flex flex-1 flex-col gap-4'>
-          <PostForm />
-          <Post source='Tesla Inc.' verified={true} />
-          <Post source='BBC' verified={true} />
-          <Post source='Amazon' verified={true} />
-        </div>
-        <RightSidebar />
+        <>
+          <LeftSidebar />
+          <div className='flex flex-1 flex-col gap-4'>
+            {user.loading ? <PostFormLoad /> : <PostForm />}
+            <Post source='Tesla Inc.' verified={true} />
+            <Post source='BBC' verified={true} />
+            <Post source='Amazon' verified={true} />
+          </div>
+          <RightSidebar />
+        </>
       </div>
     </>
-  ) : (
-    <p>Loading...</p>
   )
 }
 
