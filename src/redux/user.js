@@ -1,26 +1,32 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit'
 import { signupUser, signinUser } from '../pages/auth/userActions'
+import { database } from '../firebase/firebase'
+import { ref, get } from 'firebase/database'
+import { createAsyncThunk } from '@reduxjs/toolkit'
 
 const initialState = {
   loading: false,
   error: null,
   success: null,
-  userId: null,
   userData: {
+    userId: null,
     email: null,
     firstName: null,
     lastName: null,
   },
 }
 
+const saveData = createAsyncThunk('saveData', async data => {
+  const { email, uid } = data
+  const snapshot = await get(ref(database, 'users/' + uid))
+  const { firstName, lastName } = snapshot.val()
+  return { email, firstName, lastName, userId: uid }
+})
+
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {
-    saveData(state, action) {
-      state.userData = action.payload
-    },
-  },
+  reducers: {},
   extraReducers(builder) {
     builder
       .addMatcher(isAnyOf(signupUser.pending, signinUser.pending), state => {
@@ -31,7 +37,7 @@ export const userSlice = createSlice({
         isAnyOf(signupUser.fulfilled, signinUser.fulfilled),
         (state, action) => {
           state.loading = false
-          state.userId = action.payload.uid
+          state.userData.userId = action.payload.uid
         }
       )
       .addMatcher(
@@ -41,11 +47,14 @@ export const userSlice = createSlice({
           state.error = action.error.message
         }
       )
+      .addMatcher(saveData.fulfilled, (state, action) => {
+        state.userData = action.payload
+      })
   },
 })
 
 export const selectUser = state => state.user
 
-export const { saveData } = userSlice.actions
+export { saveData }
 
 export default userSlice.reducer

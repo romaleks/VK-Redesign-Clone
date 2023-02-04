@@ -25,7 +25,7 @@ export const signupUser = createAsyncThunk('user/signupUser', async data => {
   }
 })
 
-export const signinUser = createAsyncThunk('user/signupUser', async data => {
+export const signinUser = createAsyncThunk('user/signinUser', async data => {
   const { email, password, navigate } = data
 
   try {
