@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { auth } from '../../firebase/firebase'
 import { onAuthStateChanged } from 'firebase/auth'
 import PostFormLoad from '../../components/loading/PostFormLoad'
+import PostLoad from '../../components/loading/PostLoad'
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -31,9 +32,18 @@ const Home = () => {
           <LeftSidebar />
           <div className='flex flex-1 flex-col gap-4'>
             {user.loading ? <PostFormLoad /> : <PostForm />}
-            <Post source='Tesla Inc.' verified={true} />
-            <Post source='BBC' verified={true} />
-            <Post source='Amazon' verified={true} />
+            {user.loading ? (
+              <>
+                <PostLoad />
+                <PostLoad />
+              </>
+            ) : (
+              <>
+                <Post source='Tesla Inc.' verified={true} />
+                <Post source='BBC' verified={true} />
+                <Post source='Amazon' verified={true} />
+              </>
+            )}
           </div>
           <RightSidebar />
         </>
