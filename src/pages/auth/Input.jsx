@@ -1,12 +1,15 @@
 const Input = ({ type, reference, title, required }) => {
   return (
-    <div className='relative'>
+    <div
+      className='relative duration-300 after:absolute after:bottom-0 after:h-0.5 after:w-full after:scale-x-0 after:bg-blue-500
+    after:transition focus-within:after:scale-x-100'
+    >
       <input
         id={title}
         type={type}
         placeholder=' '
         ref={reference}
-        className='peer block w-full border-b-2 outline-none'
+        className='group peer block w-full border-b-2 outline-none'
         required={required}
       />
       <label
