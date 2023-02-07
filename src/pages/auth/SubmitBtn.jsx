@@ -1,11 +1,20 @@
+import { Button } from 'antd'
+import { useSelector } from 'react-redux'
+import { selectUser } from '../../redux/user'
+
 const SubmitBtn = ({ title }) => {
+  const user = useSelector(selectUser)
+
   return (
-    <button
-      type='submit'
-      className='cursor-pointer rounded-lg bg-blue-800 p-3 text-center text-white'
+    <Button
+      loading={!!user.loading}
+      type='ghost'
+      htmlType='submit'
+      size='large'
+      className='bg-blue-800 text-white'
     >
       {title}
-    </button>
+    </Button>
   )
 }
 
