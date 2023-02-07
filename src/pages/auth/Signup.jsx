@@ -5,6 +5,7 @@ import Input from './Input'
 import SubmitBtn from './SubmitBtn'
 import logos from '../../data/logos'
 import { signupUser } from './userActions'
+import signupBg from '../../assets/imgs/signup-bg.jpg'
 
 const Signup = () => {
   const firstNameRef = useRef()
@@ -81,7 +82,10 @@ const Signup = () => {
           </form>
         </div>
       </div>
-      <div className='flex-1'></div>
+      <div
+        style={{ backgroundImage: `url(${signupBg})` }}
+        className='flex-1 bg-cover bg-center'
+      ></div>
     </div>
   )
 }

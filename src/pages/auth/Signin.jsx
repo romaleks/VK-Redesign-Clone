@@ -6,6 +6,7 @@ import Input from './Input'
 import SubmitBtn from './SubmitBtn'
 import Checkbox from 'antd/es/checkbox/Checkbox'
 import logos from '../../data/logos'
+import signinBg from '../../assets/imgs/signin-bg.jpg'
 
 const Signin = () => {
   const emailRef = useRef()
@@ -72,7 +73,10 @@ const Signin = () => {
           </form>
         </div>
       </div>
-      <div className='flex-1'></div>
+      <div
+        style={{ backgroundImage: `url(${signinBg})` }}
+        className='flex-1 bg-cover bg-center'
+      ></div>
     </div>
   )
 }
