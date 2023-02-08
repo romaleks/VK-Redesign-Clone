@@ -33,6 +33,6 @@ export const signinUser = createAsyncThunk('user/signinUser', async data => {
     navigate('/home')
     return response.user
   } catch (err) {
-    return err.message
+    throw new Error(err.message)
   }
 })

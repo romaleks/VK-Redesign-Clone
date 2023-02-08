@@ -1,18 +1,21 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { signinUser } from './userActions'
-import Checkbox from 'antd/es/checkbox/Checkbox'
+import { Checkbox, notification } from 'antd'
+import { useSelector } from 'react-redux'
 import Input from './Input'
 import SubmitBtn from './SubmitBtn'
 import logos from '../../data/logos'
 import signinBg from '../../assets/imgs/signin-bg.jpg'
+import { selectUser } from '../../redux/user'
 
 const Signin = () => {
   const emailRef = useRef()
   const passwordRef = useRef()
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const user = useSelector(selectUser)
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -22,6 +25,33 @@ const Signin = () => {
 
     dispatch(signinUser({ email, password, navigate }))
   }
+
+  useEffect(() => {
+    if (user.success) {
+      notification.success({
+        message: 'Success!',
+        description: "You've successfully logged in",
+        placement: 'top',
+        duration: 3,
+      })
+    } else if (user.error) {
+      let description
+      if (user.errorMsg.includes('user-not-found')) {
+        description = "Such user email doesn't exist."
+      } else if (user.errorMsg.includes('wrong-password')) {
+        description = "You've entered the wrong password."
+      } else {
+        description = 'Too many attempts! Try again later.'
+      }
+
+      notification.error({
+        description,
+        message: 'Error!',
+        placement: 'top',
+        duration: 3,
+      })
+    }
+  }, [user.success, user.error])
 
   return (
     <div className='flex h-screen'>

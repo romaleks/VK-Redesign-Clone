@@ -5,9 +5,10 @@ import { ref, get } from 'firebase/database'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
 const initialState = {
-  loading: null,
-  error: null,
-  success: null,
+  loading: false,
+  error: false,
+  errorMsg: null,
+  success: false,
   userData: {
     userId: null,
     email: null,
@@ -44,6 +45,8 @@ export const userSlice = createSlice({
         isAnyOf(signupUser.fulfilled, signinUser.fulfilled),
         (state, action) => {
           state.loading = false
+          state.error = false
+          state.success = true
           state.userData.userId = action.payload.uid
         }
       )
@@ -51,7 +54,9 @@ export const userSlice = createSlice({
         isAnyOf(signupUser.rejected, signinUser.rejected, saveData.rejected),
         (state, action) => {
           state.loading = false
-          state.error = action.error.message
+          state.success = false
+          state.error = true
+          state.errorMsg = action.error.message
         }
       )
   },
