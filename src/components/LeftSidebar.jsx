@@ -12,7 +12,15 @@ const LeftSidebar = () => {
 
   return (
     <div className='sticky top-4 flex basis-60 flex-col gap-4 overflow-y-auto'>
-      {user.loading ? <DropDownBtnLoad /> : <DropdownButton image={avatar} />}
+      {user.loading ? (
+        <DropDownBtnLoad />
+      ) : (
+        <DropdownButton
+          image={avatar}
+          firstName={user.userData.firstName}
+          lastName={user.userData.lastName}
+        />
+      )}
       <div className='overflow-hidden rounded-lg bg-gray-100'>
         <ContentItem
           title='John Lenon'

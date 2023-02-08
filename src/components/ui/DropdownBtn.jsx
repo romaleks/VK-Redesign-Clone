@@ -33,7 +33,7 @@ const items = [
   },
 ]
 
-const DropdownButton = ({ image }) => (
+const DropdownButton = ({ image, firstName, lastName }) => (
   <Dropdown
     menu={{
       items,
@@ -48,7 +48,9 @@ const DropdownButton = ({ image }) => (
           alt='avatar'
           className='h-10 w-10 rounded-full bg-gray-300'
         />
-        <span className='font-bold'>IDDna</span>
+        <span className='font-bold leading-5'>
+          {firstName} {lastName}
+        </span>
       </div>
       <img src={icons.arrow} alt='open' className='h-5' />
     </a>
