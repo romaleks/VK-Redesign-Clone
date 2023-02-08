@@ -21,7 +21,7 @@ export const signupUser = createAsyncThunk('user/signupUser', async data => {
     navigate('/home')
     return response.user
   } catch (err) {
-    return err.message
+    throw new Error(err.message)
   }
 })
 

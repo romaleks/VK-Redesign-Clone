@@ -30,7 +30,7 @@ const Signin = () => {
     if (user.success) {
       notification.success({
         message: 'Success!',
-        description: "You've successfully logged in",
+        description: "You've successfully signed in.",
         placement: 'top',
         duration: 3,
       })

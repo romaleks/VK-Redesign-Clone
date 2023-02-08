@@ -1,10 +1,12 @@
-import { useRef } from 'react'
-import { useDispatch } from 'react-redux'
+import { useEffect, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
+import { signupUser } from './userActions'
+import { selectUser } from '../../redux/user'
+import { notification } from 'antd'
 import Input from './Input'
 import SubmitBtn from './SubmitBtn'
 import logos from '../../data/logos'
-import { signupUser } from './userActions'
 import signupBg from '../../assets/imgs/signup-bg.jpg'
 
 const Signup = () => {
@@ -14,6 +16,7 @@ const Signup = () => {
   const passwordRef = useRef()
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const user = useSelector(selectUser)
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -25,6 +28,33 @@ const Signup = () => {
 
     dispatch(signupUser({ firstName, lastName, email, password, navigate }))
   }
+
+  useEffect(() => {
+    if (user.success) {
+      notification.success({
+        message: 'Success!',
+        description: "You've successfully signed up.",
+        placement: 'top',
+        duration: 3,
+      })
+    } else if (user.error) {
+      let description
+      if (user.errorMsg.includes('6 characters')) {
+        description = 'Password should consist of at least 6 characters.'
+      } else if (user.errorMsg.includes('email-already-in-use')) {
+        description = 'This email is already in use.'
+      } else {
+        description = 'Too many attempts! Try again later.'
+      }
+
+      notification.error({
+        description,
+        message: 'Error!',
+        placement: 'top',
+        duration: 3,
+      })
+    }
+  }, [user.success, user.error])
 
   return (
     <div className='flex h-screen'>
