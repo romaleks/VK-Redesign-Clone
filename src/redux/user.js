@@ -17,7 +17,7 @@ const initialState = {
   },
 }
 
-const saveData = createAsyncThunk('saveData', async data => {
+const saveData = createAsyncThunk('user/saveData', async data => {
   const { email, uid } = data
   const snapshot = await get(ref(database, 'users/' + uid))
   const { firstName, lastName } = snapshot.val()

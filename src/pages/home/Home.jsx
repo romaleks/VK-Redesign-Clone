@@ -3,17 +3,19 @@ import LeftSidebar from '../../components/LeftSidebar'
 import RightSidebar from '../../components/RightSidebar'
 import PostForm from './PostForm'
 import Post from './Post'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { selectUser, saveData } from '../../redux/user'
 import { useDispatch, useSelector } from 'react-redux'
 import { auth } from '../../firebase/firebase'
 import { onAuthStateChanged } from 'firebase/auth'
 import PostFormLoad from '../../components/loading/PostFormLoad'
 import PostLoad from '../../components/loading/PostLoad'
+import { getNews, selectNews } from '../../redux/news'
 
 const Home = () => {
   const dispatch = useDispatch()
   const user = useSelector(selectUser)
+  const news = useSelector(selectNews)
 
   useEffect(() => {
     onAuthStateChanged(auth, userAuth => {
@@ -22,6 +24,7 @@ const Home = () => {
         dispatch(saveData({ email, uid }))
       }
     })
+    dispatch(getNews())
   }, [])
 
   return (
@@ -32,13 +35,22 @@ const Home = () => {
           <LeftSidebar />
           <div className='flex flex-1 flex-col gap-4'>
             {user.loading ? <PostFormLoad /> : <PostForm />}
-            {user.loading ? (
+            {news.loading ? (
               <>
                 <PostLoad />
                 <PostLoad />
               </>
             ) : (
               <>
+                {news.posts.map((post, index) => (
+                  <Post
+                    key={index}
+                    source={post.source.name}
+                    title={post.title}
+                    description={post.description}
+                    image={post.urlToImage}
+                  />
+                ))}
                 <Post source='Tesla Inc.' verified={true} />
                 <Post source='BBC' verified={true} />
                 <Post source='Amazon' verified={true} />

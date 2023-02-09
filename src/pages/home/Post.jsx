@@ -2,7 +2,7 @@ import ReactionBtn from '../../components/ui/ReactionBtn'
 import icons from '../../data/icons'
 import logos from '../../data/logos'
 
-const Post = ({ source, verified }) => {
+const Post = ({ source, title, description, image, verified }) => {
   return (
     <div className='flex flex-col gap-4 rounded-lg border border-gray-300 p-6'>
       <div className='flex gap-3'>
@@ -11,7 +11,7 @@ const Post = ({ source, verified }) => {
         </div>
         <div className='leading-3'>
           <div className='flex items-center gap-1.5'>
-            <h2 className='text-xl font-bold'>{source}</h2>
+            <h2 className='text-2xl font-bold'>{source}</h2>
             {verified ? (
               <img src={icons.tick} alt='verified' className='h-6' />
             ) : null}
@@ -20,12 +20,8 @@ const Post = ({ source, verified }) => {
         </div>
       </div>
       <div className='flex flex-col gap-3'>
-        <p className='font-medium'>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quasi illum
-          necessitatibus magni, ab incidunt enim tempora nisi vero eveniet earum
-          accusantium fuga impedit numquam vitae laborum repudiandae perferendis
-          iusto qui.
-        </p>
+        <h3 className='text-lg font-bold'>{title}</h3>
+        <p className='font-medium'>{description}</p>
         <div className='grid h-96 grid-cols-3 grid-rows-5 gap-4'>
           <div className='col-span-2 row-span-full rounded-lg bg-gray-200'></div>
           <div className='row-span-2 rounded-lg bg-gray-200'></div>
