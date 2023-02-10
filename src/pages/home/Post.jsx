@@ -1,8 +1,9 @@
 import ReactionBtn from '../../components/ui/ReactionBtn'
 import icons from '../../data/icons'
 import logos from '../../data/logos'
+import moment from 'moment/moment'
 
-const Post = ({ source, title, description, image, verified }) => {
+const Post = ({ source, title, description, image, timeAgo, verified }) => {
   return (
     <div className='flex flex-col gap-4 rounded-lg border border-gray-300 p-6'>
       <div className='flex gap-3'>
@@ -16,7 +17,9 @@ const Post = ({ source, title, description, image, verified }) => {
               <img src={icons.tick} alt='verified' className='h-6' />
             ) : null}
           </div>
-          <span className='font-medium text-gray-400'>5 minutes ago</span>
+          <span className='font-medium text-gray-400'>
+            {moment(timeAgo).fromNow()}
+          </span>
         </div>
       </div>
       <div className='flex flex-col gap-3'>

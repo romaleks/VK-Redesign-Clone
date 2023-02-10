@@ -2,14 +2,15 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   loading: false,
+  success: false,
   error: false,
   posts: [],
 }
 
 const API_KEY = '0e232cb77ea54f3295e541bbe4f9965e'
-const getNews = createAsyncThunk('news/getNews', async () => {
+const getNews = createAsyncThunk('news/getNews', async keyWord => {
   const response = await fetch(
-    `https://newsapi.org/v2/top-headlines?country=us&from=2023-01-09&sortBy=publishedAt&pageSize=5&apiKey=${API_KEY}`
+    `https://newsapi.org/v2/top-headlines?q=${keyWord}&sortBy=publishedAt&pageSize=3&apiKey=${API_KEY}`
   )
   const data = await response.json()
   return data
@@ -26,7 +27,9 @@ const newsSlice = createSlice({
       })
       .addCase(getNews.fulfilled, (state, action) => {
         state.loading = false
-        state.posts = action.payload.articles
+        state.success = true
+        state.posts.push(...action.payload.articles)
+        console.log(state.posts)
       })
   },
 })

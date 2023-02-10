@@ -24,7 +24,11 @@ const Home = () => {
         dispatch(saveData({ email, uid }))
       }
     })
-    dispatch(getNews())
+
+    dispatch(getNews('Tesla'))
+    dispatch(getNews('Apple'))
+    dispatch(getNews('Amazon'))
+    dispatch(getNews('BBC'))
   }, [])
 
   return (
@@ -48,6 +52,7 @@ const Home = () => {
                     source={post.source.name}
                     title={post.title}
                     description={post.description}
+                    timeAgo={post.publishedAt}
                     image={post.urlToImage}
                   />
                 ))}
