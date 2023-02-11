@@ -16,6 +16,7 @@ const Home = () => {
   const dispatch = useDispatch()
   const user = useSelector(selectUser)
   const news = useSelector(selectNews)
+  let posts = [...news.posts]
 
   useEffect(() => {
     onAuthStateChanged(auth, userAuth => {
@@ -46,16 +47,20 @@ const Home = () => {
               </>
             ) : (
               <>
-                {news.posts.map((post, index) => (
-                  <Post
-                    key={index}
-                    source={post.source.name}
-                    title={post.title}
-                    description={post.description}
-                    timeAgo={post.publishedAt}
-                    image={post.urlToImage}
-                  />
-                ))}
+                {posts
+                  .sort(
+                    (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
+                  )
+                  .map((post, index) => (
+                    <Post
+                      key={index}
+                      source={post.source.name}
+                      title={post.title}
+                      description={post.description}
+                      timeAgo={post.publishedAt}
+                      image={post.urlToImage}
+                    />
+                  ))}
                 <Post source='Tesla Inc.' verified={true} />
                 <Post source='BBC' verified={true} />
                 <Post source='Amazon' verified={true} />

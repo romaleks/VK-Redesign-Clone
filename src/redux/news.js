@@ -23,13 +23,13 @@ const newsSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(getNews.pending, (state, action) => {
+        state.success = false
         state.loading = true
       })
       .addCase(getNews.fulfilled, (state, action) => {
         state.loading = false
         state.success = true
         state.posts.push(...action.payload.articles)
-        console.log(state.posts)
       })
   },
 })
