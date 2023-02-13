@@ -61,6 +61,7 @@ const Home = () => {
                       timeAgo={post.publishedAt}
                       image={post.urlToImage}
                       articleSrc={post.url}
+                      verified={post.verified}
                     />
                   ))}
               </>

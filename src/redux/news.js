@@ -17,6 +17,7 @@ const getNews = createAsyncThunk('news/getNews', async keyWord => {
 
   for (const article of data.articles) {
     article.keyWord = keyWord
+    article.verified = true
   }
 
   const numOfPosts = data.articles.length

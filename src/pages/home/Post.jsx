@@ -56,6 +56,7 @@ const Post = ({
         </div>
         <a
           href={articleSrc}
+          target='_blank'
           className='flex gap-1 text-xl text-blue-500 hover:underline'
         >
           Source <img src={icons.link} className='h-6' />
