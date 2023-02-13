@@ -15,6 +15,8 @@ import comment from '../assets/svgs/comment.svg'
 import fire from '../assets/svgs/fire.svg'
 import like from '../assets/svgs/like.svg'
 import share from '../assets/svgs/share.svg'
+import search from '../assets/svgs/search.svg'
+import link from '../assets/svgs/link.svg'
 
 export default {
   profile,
@@ -34,4 +36,6 @@ export default {
   fire,
   like,
   share,
+  search,
+  link,
 }

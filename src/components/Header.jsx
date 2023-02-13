@@ -1,5 +1,6 @@
 import Notifications from './ui/Notifications'
 import logos from '../data/logos'
+import icons from '../data/icons'
 
 const Header = () => {
   return (

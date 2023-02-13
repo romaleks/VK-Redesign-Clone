@@ -60,6 +60,7 @@ const Home = () => {
                       logo={post.keyWord}
                       timeAgo={post.publishedAt}
                       image={post.urlToImage}
+                      articleSrc={post.url}
                     />
                   ))}
               </>
