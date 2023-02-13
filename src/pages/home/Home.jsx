@@ -62,9 +62,6 @@ const Home = () => {
                       image={post.urlToImage}
                     />
                   ))}
-                <Post source='Tesla Inc.' verified={true} />
-                <Post source='BBC' verified={true} />
-                <Post source='Amazon' verified={true} />
               </>
             )}
           </div>

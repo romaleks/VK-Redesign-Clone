@@ -33,11 +33,8 @@ const Post = ({
       <div className='flex flex-col gap-3'>
         <h3 className='text-lg font-bold'>{title}</h3>
         <p className='font-medium'>{description}</p>
-        <div className='grid h-96 grid-cols-3 grid-rows-5 gap-4'>
-          <div className='col-span-2 row-span-full rounded-lg bg-gray-200'></div>
-          <div className='row-span-2 rounded-lg bg-gray-200'></div>
-          <div className='row-span-2 rounded-lg bg-gray-200'></div>
-          <div className='rounded-lg bg-gray-200'></div>
+        <div className='h-full'>
+          <img src={image} alt='image' className='rounded-lg bg-gray-200'></img>
         </div>
       </div>
       <div className='flex gap-3'>
