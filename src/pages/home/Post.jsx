@@ -2,6 +2,7 @@ import ReactionBtn from '../../components/ui/ReactionBtn'
 import icons from '../../data/icons'
 import logos from '../../data/logos'
 import moment from 'moment/moment'
+import noImage from '../../assets/imgs/no-image.png'
 
 const Post = ({
   source,
@@ -12,6 +13,10 @@ const Post = ({
   timeAgo,
   verified,
 }) => {
+  const onImageError = e => {
+    e.target.src = noImage
+  }
+
   return (
     <div className='flex flex-col gap-4 rounded-lg border border-gray-300 p-6'>
       <div className='flex gap-3'>
@@ -34,7 +39,12 @@ const Post = ({
         <h3 className='text-lg font-bold'>{title}</h3>
         <p className='font-medium'>{description}</p>
         <div className='h-full'>
-          <img src={image} alt='image' className='rounded-lg bg-gray-200'></img>
+          <img
+            src={image}
+            alt='image'
+            onError={onImageError}
+            className='w-full rounded-lg bg-gray-200'
+          ></img>
         </div>
       </div>
       <div className='flex gap-3'>
