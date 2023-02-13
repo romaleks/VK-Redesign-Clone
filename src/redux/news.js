@@ -1,4 +1,6 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, nanoid } from '@reduxjs/toolkit'
+import { database } from '../firebase/firebase'
+import { ref, set } from 'firebase/database'
 
 const initialState = {
   loading: false,
@@ -29,7 +31,17 @@ const getNews = createAsyncThunk('news/getNews', async keyWord => {
 const newsSlice = createSlice({
   name: 'news',
   initialState,
-  reducers: {},
+  reducers: {
+    createPost(state, action) {
+      const postId = nanoid()
+      const { uid, title } = action.payload
+
+      set(ref(database, 'posts/' + postId), {
+        uid,
+        title,
+      })
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(getNews.pending, (state, action) => {
@@ -48,5 +60,6 @@ const newsSlice = createSlice({
 export const selectNews = state => state.news
 
 export { getNews }
+export const { createPost } = newsSlice.actions
 
 export default newsSlice.reducer

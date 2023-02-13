@@ -1,14 +1,29 @@
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { selectUser } from '../../redux/user'
 import icons from '../../data/icons'
+import { useRef } from 'react'
+import { createPost } from '../../redux/news'
 
 const PostForm = () => {
   const user = useSelector(selectUser)
+  const titleRef = useRef()
+  const dispatch = useDispatch()
+
+  const handleSubmit = e => {
+    e.preventDefault()
+
+    const title = titleRef.current.value
+    dispatch(createPost({ uid: user.userData.userId, title }))
+  }
 
   return (
-    <div className='flex gap-2 rounded-lg border border-gray-300 px-4 py-2'>
+    <form
+      onSubmit={handleSubmit}
+      className='flex gap-2 rounded-lg border border-gray-300 px-4 py-2'
+    >
       <input
         type='text'
+        ref={titleRef}
         placeholder={`${
           user.userData ? user.userData.firstName : 'Loading...'
         }, tell us something new...`}
@@ -25,7 +40,7 @@ const PostForm = () => {
           </div>
         )
       })}
-    </div>
+    </form>
   )
 }
 
