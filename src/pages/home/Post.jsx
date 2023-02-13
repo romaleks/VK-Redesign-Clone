@@ -49,18 +49,21 @@ const Post = ({
         </div>
       </div>
       <div className='flex items-center justify-between gap-3'>
-        <div className='flex gap-3'>
-          <ReactionBtn icon='like' />
-          <ReactionBtn icon='comment' />
-          <ReactionBtn icon='share' />
-        </div>
-        <a
-          href={articleSrc}
-          target='_blank'
-          className='flex gap-1 text-xl text-blue-500 hover:underline'
-        >
-          Source <img src={icons.link} className='h-6' />
-        </a>
+        {!verified ? (
+          <>
+            <ReactionBtn icon='like' />
+            <ReactionBtn icon='comment' />
+            <ReactionBtn icon='share' />
+          </>
+        ) : (
+          <a
+            href={articleSrc}
+            target='_blank'
+            className='flex gap-1 text-xl text-blue-500 hover:underline'
+          >
+            Source <img src={icons.link} className='h-6' />
+          </a>
+        )}
       </div>
     </div>
   )
