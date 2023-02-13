@@ -5,6 +5,7 @@ const initialState = {
   success: false,
   error: false,
   posts: [],
+  numOfPosts: {},
 }
 
 const API_KEY = '0e232cb77ea54f3295e541bbe4f9965e'
@@ -18,6 +19,9 @@ const getNews = createAsyncThunk('news/getNews', async keyWord => {
     article.keyWord = keyWord
   }
 
+  const numOfPosts = data.articles.length
+  data.keyWord = keyWord
+  data.numOfPosts = numOfPosts
   return data
 })
 
@@ -35,6 +39,7 @@ const newsSlice = createSlice({
         state.loading = false
         state.success = true
         state.posts.push(...action.payload.articles)
+        state.numOfPosts[action.payload.keyWord] = action.payload.numOfPosts
       })
   },
 })
