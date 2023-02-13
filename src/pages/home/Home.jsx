@@ -57,6 +57,7 @@ const Home = () => {
                       source={post.source.name}
                       title={post.title}
                       description={post.description}
+                      logo={post.keyWord}
                       timeAgo={post.publishedAt}
                       image={post.urlToImage}
                     />

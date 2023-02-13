@@ -10,7 +10,7 @@ export default {
   vk_w,
   vk_b,
   avatar,
-  'Tesla Inc.': tesla,
+  Tesla: tesla,
   Apple: apple,
   Amazon: amazon,
   BBC: bbc,

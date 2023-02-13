@@ -13,6 +13,11 @@ const getNews = createAsyncThunk('news/getNews', async keyWord => {
     `https://newsapi.org/v2/top-headlines?q=${keyWord}&sortBy=publishedAt&pageSize=3&apiKey=${API_KEY}`
   )
   const data = await response.json()
+
+  for (const article of data.articles) {
+    article.keyWord = keyWord
+  }
+
   return data
 })
 

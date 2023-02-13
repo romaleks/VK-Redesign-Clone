@@ -3,12 +3,20 @@ import icons from '../../data/icons'
 import logos from '../../data/logos'
 import moment from 'moment/moment'
 
-const Post = ({ source, title, description, image, timeAgo, verified }) => {
+const Post = ({
+  source,
+  title,
+  description,
+  logo,
+  image,
+  timeAgo,
+  verified,
+}) => {
   return (
     <div className='flex flex-col gap-4 rounded-lg border border-gray-300 p-6'>
       <div className='flex gap-3'>
         <div className='h-12 w-12 rounded-full border border-gray-300 p-1.5'>
-          <img src={logos[source]} alt='logo' />
+          <img src={logos[logo]} alt='logo' />
         </div>
         <div className='leading-3'>
           <div className='flex items-center gap-1.5'>
