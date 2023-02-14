@@ -17,7 +17,7 @@ const PostForm = () => {
     const source = `${user.userData.firstName} ${user.userData.lastName}`
     const image = null
     const logo = null //user.userData.avatar
-    const timeStamp = Date.now()
+    const publishedAt = Date.now()
 
     dispatch(
       createPost({
@@ -27,7 +27,7 @@ const PostForm = () => {
         source,
         image,
         logo,
-        timeStamp,
+        publishedAt,
       })
     )
   }
