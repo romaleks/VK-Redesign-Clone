@@ -13,7 +13,23 @@ const PostForm = () => {
     e.preventDefault()
 
     const title = titleRef.current.value
-    dispatch(createPost({ uid: user.userData.userId, title }))
+    const description = null
+    const source = `${user.userData.firstName} ${user.userData.lastName}`
+    const image = null
+    const logo = null //user.userData.avatar
+    const timeStamp = Date.now()
+
+    dispatch(
+      createPost({
+        uid: user.userData.userId,
+        title,
+        description,
+        source,
+        image,
+        logo,
+        timeStamp,
+      })
+    )
   }
 
   return (

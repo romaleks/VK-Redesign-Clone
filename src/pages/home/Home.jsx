@@ -10,7 +10,7 @@ import { auth } from '../../firebase/firebase'
 import { onAuthStateChanged } from 'firebase/auth'
 import PostFormLoad from '../../components/loading/PostFormLoad'
 import PostLoad from '../../components/loading/PostLoad'
-import { getNews, selectNews } from '../../redux/news'
+import { getNews, loadUsersPosts, selectNews } from '../../redux/news'
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -30,6 +30,7 @@ const Home = () => {
     dispatch(getNews('Apple'))
     dispatch(getNews('Amazon'))
     dispatch(getNews('BBC'))
+    dispatch(loadUsersPosts())
   }, [])
 
   return (

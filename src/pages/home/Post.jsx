@@ -21,8 +21,11 @@ const Post = ({
   return (
     <div className='flex flex-col gap-4 rounded-lg border border-gray-300 p-6'>
       <div className='flex gap-3'>
-        <div className='h-12 w-12 rounded-full border border-gray-300 p-1.5'>
-          <img src={logos[logo]} alt='logo' />
+        <div
+          className='h-12 w-12 rounded-full border border-gray-300'
+          style={{ padding: verified ? '6px' : 0 }}
+        >
+          <img src={logos[logo ? logo : 'avatar']} alt='logo' />
         </div>
         <div className='leading-3'>
           <div className='flex items-center gap-1.5'>
@@ -38,10 +41,10 @@ const Post = ({
       </div>
       <div className='flex flex-col gap-3'>
         <h3 className='text-lg font-bold'>{title}</h3>
-        <p className='font-medium'>{description}</p>
+        {description ? <p className='font-medium'>{description}</p> : null}
         <div className='h-full'>
           <img
-            src={image}
+            src={image ? image : noImage}
             alt='image'
             onError={onImageError}
             className='w-full rounded-lg bg-gray-200'
@@ -54,6 +57,7 @@ const Post = ({
             <ReactionBtn icon='like' />
             <ReactionBtn icon='comment' />
             <ReactionBtn icon='share' />
+            <div className='flex-1'></div>
           </>
         ) : (
           <a
