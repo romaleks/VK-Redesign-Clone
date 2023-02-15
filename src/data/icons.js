@@ -17,6 +17,7 @@ import like from '../assets/svgs/like.svg'
 import share from '../assets/svgs/share.svg'
 import search from '../assets/svgs/search.svg'
 import link from '../assets/svgs/link.svg'
+import send from '../assets/svgs/send.svg'
 
 export default {
   profile,
@@ -38,4 +39,5 @@ export default {
   share,
   search,
   link,
+  send,
 }

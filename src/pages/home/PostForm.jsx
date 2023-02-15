@@ -7,13 +7,14 @@ import { createPost } from '../../redux/news'
 const PostForm = () => {
   const user = useSelector(selectUser)
   const titleRef = useRef()
+  const descRef = useRef()
   const dispatch = useDispatch()
 
   const handleSubmit = e => {
     e.preventDefault()
 
     const title = titleRef.current.value
-    const description = null
+    const description = descRef.current.value
     const source = `${user.userData.firstName} ${user.userData.lastName}`
     const image = null
     const logo = null //user.userData.avatar
@@ -47,19 +48,22 @@ const PostForm = () => {
           className='flex-1 rounded-full bg-gray-200 px-6 py-1 text-lg font-medium outline-none
         placeholder:text-gray-400 focus:bg-gray-300'
         />
-        {['photos', 'videos', 'music'].map((btn, index) => {
-          return (
-            <div
-              key={index}
-              className='cursor-pointer rounded-lg bg-gray-200 p-1 duration-75 hover:bg-gray-300'
-            >
-              <img src={icons[btn]} alt={btn} className='h-8' />
-            </div>
-          )
-        })}
+        <div className='cursor-pointer rounded-lg bg-gray-200 p-1 duration-75 hover:bg-gray-300'>
+          <img src={icons.photos} alt='photo' className='h-8' />
+        </div>
+        <div className='cursor-pointer rounded-lg bg-gray-200 p-1 duration-75 hover:bg-gray-300'>
+          <img src={icons.music} alt='music' className='h-8' />
+        </div>
+        <div
+          onClick={handleSubmit}
+          className='cursor-pointer rounded-lg bg-gray-200 p-1 duration-75 hover:bg-gray-300'
+        >
+          <img src={icons.send} alt='send' className='h-8' />
+        </div>
       </div>
       <textarea
         placeholder='Description...'
+        ref={descRef}
         className='hidden h-full w-full rounded-lg bg-gray-200 px-6 py-1 text-lg font-medium
         outline-none placeholder:text-gray-400 focus:bg-gray-300 group-focus-within:block'
       ></textarea>
