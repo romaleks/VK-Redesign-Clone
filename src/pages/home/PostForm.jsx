@@ -8,6 +8,7 @@ const PostForm = () => {
   const user = useSelector(selectUser)
   const titleRef = useRef()
   const descRef = useRef()
+  const imageRef = useRef()
   const dispatch = useDispatch()
 
   const handleSubmit = e => {
@@ -15,8 +16,8 @@ const PostForm = () => {
 
     const title = titleRef.current.value
     const description = descRef.current.value
+    const image = imageRef.current.value
     const source = `${user.userData.firstName} ${user.userData.lastName}`
-    const image = null
     const logo = null //user.userData.avatar
     const publishedAt = Date.now()
 
@@ -48,8 +49,24 @@ const PostForm = () => {
           className='flex-1 rounded-full bg-gray-200 px-6 py-1 text-lg font-medium outline-none
         placeholder:text-gray-400 focus:bg-gray-300'
         />
-        <div className='cursor-pointer rounded-lg bg-gray-200 p-1 duration-75 hover:bg-gray-300'>
-          <img src={icons.photos} alt='photo' className='h-8' />
+        <div>
+          <label
+            htmlFor='photo'
+            className='block cursor-pointer rounded-lg bg-gray-200 p-1 duration-75 hover:bg-gray-300'
+          >
+            <img
+              src={icons.photos}
+              alt='photo'
+              className='h-8 cursor-pointer'
+            />
+          </label>
+          <input
+            type='file'
+            accept='image/png, image/gif, image/jpeg'
+            id='photo'
+            ref={imageRef}
+            className='hidden'
+          />
         </div>
         <div className='cursor-pointer rounded-lg bg-gray-200 p-1 duration-75 hover:bg-gray-300'>
           <img src={icons.music} alt='music' className='h-8' />
@@ -67,6 +84,11 @@ const PostForm = () => {
         className='hidden h-full w-full rounded-lg bg-gray-200 px-6 py-1 text-lg font-medium
         outline-none placeholder:text-gray-400 focus:bg-gray-300 group-focus-within:block'
       ></textarea>
+      {/* <img
+        src={imageRef.current ? imageRef.current.value : null}
+        alt=''
+        className='h-full w-full'
+      /> */}
     </form>
   )
 }
