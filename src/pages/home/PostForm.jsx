@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { selectUser } from '../../redux/user'
 import icons from '../../data/icons'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { createPost } from '../../redux/news'
 
 const PostForm = () => {
@@ -10,6 +10,7 @@ const PostForm = () => {
   const descRef = useRef()
   const imageRef = useRef()
   const dispatch = useDispatch()
+  const [imgPreview, setImgPreview] = useState()
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -32,6 +33,11 @@ const PostForm = () => {
         publishedAt,
       })
     )
+  }
+
+  const handleImgChange = e => {
+    const image = e.target.files[0]
+    setImgPreview(image)
   }
 
   return (
@@ -66,6 +72,7 @@ const PostForm = () => {
             id='photo'
             ref={imageRef}
             className='hidden'
+            onChange={handleImgChange}
           />
         </div>
         <div className='cursor-pointer rounded-lg bg-gray-200 p-1 duration-75 hover:bg-gray-300'>
@@ -84,11 +91,11 @@ const PostForm = () => {
         className='hidden h-full w-full rounded-lg bg-gray-200 px-6 py-1 text-lg font-medium
         outline-none placeholder:text-gray-400 focus:bg-gray-300 group-focus-within:block'
       ></textarea>
-      {/* <img
-        src={imageRef.current ? imageRef.current.value : null}
+      <img
+        src={imgPreview ? URL.createObjectURL(imgPreview) : null}
         alt=''
-        className='h-full w-full'
-      /> */}
+        className='w-full rounded-lg'
+      />
     </form>
   )
 }
