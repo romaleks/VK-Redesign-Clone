@@ -1,8 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { selectUser } from '../../redux/user'
-import icons from '../../data/icons'
 import { useEffect, useRef, useState } from 'react'
 import { createPost, selectNews } from '../../redux/news'
+import { Spin } from 'antd'
+import { LoadingOutlined } from '@ant-design/icons'
+import icons from '../../data/icons'
 
 const PostForm = () => {
   const user = useSelector(selectUser)
@@ -83,7 +85,7 @@ const PostForm = () => {
             <img
               src={icons.photos}
               alt='photo'
-              className='h-8 cursor-pointer'
+              className='h-8 w-8 cursor-pointer'
             />
           </label>
           <input
@@ -95,13 +97,20 @@ const PostForm = () => {
           />
         </div>
         <div className='cursor-pointer rounded-lg bg-gray-200 p-1 duration-75 hover:bg-gray-300'>
-          <img src={icons.music} alt='music' className='h-8' />
+          <img src={icons.music} alt='music' className='h-8 w-8' />
         </div>
         <div
           onClick={handleSubmit}
           className='cursor-pointer rounded-lg bg-gray-200 p-1 duration-75 hover:bg-gray-300'
         >
-          <img src={icons.send} alt='send' className='h-8' />
+          {news.loading ? (
+            <Spin
+              indicator={<LoadingOutlined style={{ fontSize: 24 }} />}
+              className='flex h-8 w-8 items-center justify-center'
+            />
+          ) : (
+            <img src={icons.send} alt='send' className='h-8' />
+          )}
         </div>
       </div>
       <div
