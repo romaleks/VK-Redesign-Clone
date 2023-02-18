@@ -42,6 +42,14 @@ const loadUsersPosts = createAsyncThunk('news/loadUsersPosts', async () => {
 const createPost = createAsyncThunk('news/createPost', async postData => {
   const postId = nanoid()
   const { uid, title, description, source, image, logo, publishedAt } = postData
+  let urlToImage = null
+
+  if (image) {
+    const storageRef = sRef(storage, 'postsImages/' + postId)
+    const response = await uploadBytes(storageRef, image)
+    urlToImage = await getDownloadURL(response.ref)
+  }
+
   const data = {
     uid,
     title,
@@ -53,10 +61,6 @@ const createPost = createAsyncThunk('news/createPost', async postData => {
       name: source,
     },
   }
-
-  const storageRef = sRef(storage, 'postsImages/' + postId)
-  const response = await uploadBytes(storageRef, image)
-  const urlToImage = await getDownloadURL(response.ref)
 
   set(ref(database, 'posts/'), {
     [postId]: data,
