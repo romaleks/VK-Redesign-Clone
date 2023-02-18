@@ -42,12 +42,7 @@ const loadUsersPosts = createAsyncThunk('news/loadUsersPosts', async () => {
 const createPost = createAsyncThunk('news/createPost', async postData => {
   const postId = nanoid()
   const { uid, title, description, source, image, logo, publishedAt } = postData
-
-  const storageRef = sRef(storage, 'postsImages/' + postId)
-  const response = await uploadBytes(storageRef, image)
-  const urlToImage = await getDownloadURL(response.ref)
-
-  set(ref(database, 'posts/' + postId), {
+  const data = {
     uid,
     title,
     description,
@@ -57,7 +52,17 @@ const createPost = createAsyncThunk('news/createPost', async postData => {
     source: {
       name: source,
     },
+  }
+
+  const storageRef = sRef(storage, 'postsImages/' + postId)
+  const response = await uploadBytes(storageRef, image)
+  const urlToImage = await getDownloadURL(response.ref)
+
+  set(ref(database, 'posts/'), {
+    [postId]: data,
   })
+
+  return data
 })
 
 const newsSlice = createSlice({
@@ -66,6 +71,9 @@ const newsSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
+      .addCase(createPost.fulfilled, (state, action) => {
+        state.posts.push(action.payload)
+      })
       .addCase(getNews.fulfilled, (state, action) => {
         state.posts.push(...action.payload.articles)
         state.numOfPosts[action.payload.keyWord] = action.payload.numOfPosts

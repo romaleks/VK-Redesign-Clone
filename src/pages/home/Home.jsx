@@ -16,7 +16,7 @@ const Home = () => {
   const dispatch = useDispatch()
   const user = useSelector(selectUser)
   const news = useSelector(selectNews)
-  let posts = [...news.posts]
+  const posts = [...news.posts]
 
   useEffect(() => {
     onAuthStateChanged(auth, userAuth => {
