@@ -43,6 +43,7 @@ const PostForm = () => {
       titleRef.current.value = ''
       descRef.current.value = ''
       setImgPreview(null)
+      setInputState(false)
     }
   }, [news.success])
 
