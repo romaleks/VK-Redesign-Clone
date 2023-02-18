@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { selectUser } from '../../redux/user'
 import icons from '../../data/icons'
-import { useRef, useState } from 'react'
-import { createPost } from '../../redux/news'
+import { useEffect, useRef, useState } from 'react'
+import { createPost, selectNews } from '../../redux/news'
 
 const PostForm = () => {
   const user = useSelector(selectUser)
+  const news = useSelector(selectNews)
   const titleRef = useRef()
   const descRef = useRef()
   const dispatch = useDispatch()
@@ -34,6 +35,14 @@ const PostForm = () => {
       })
     )
   }
+
+  useEffect(() => {
+    if (news.success) {
+      titleRef.current.value = ''
+      descRef.current.value = ''
+      setImgPreview(null)
+    }
+  }, [news.success])
 
   const handleImgChange = e => {
     const image = e.target.files[0]

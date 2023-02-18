@@ -50,7 +50,19 @@ const createPost = createAsyncThunk('news/createPost', async postData => {
     urlToImage = await getDownloadURL(response.ref)
   }
 
-  const data = {
+  set(ref(database, 'posts/' + postId), {
+    uid,
+    title,
+    description,
+    logo,
+    urlToImage,
+    publishedAt,
+    source: {
+      name: source,
+    },
+  })
+
+  return {
     uid,
     title,
     description,
@@ -61,12 +73,6 @@ const createPost = createAsyncThunk('news/createPost', async postData => {
       name: source,
     },
   }
-
-  set(ref(database, 'posts/'), {
-    [postId]: data,
-  })
-
-  return data
 })
 
 const newsSlice = createSlice({
@@ -88,14 +94,18 @@ const newsSlice = createSlice({
         }
       })
       .addMatcher(
-        isAnyOf(getNews.pending, loadUsersPosts.pending),
+        isAnyOf(getNews.pending, loadUsersPosts.pending, createPost.pending),
         (state, action) => {
           state.success = false
           state.loading = true
         }
       )
       .addMatcher(
-        isAnyOf(getNews.fulfilled, loadUsersPosts.fulfilled),
+        isAnyOf(
+          getNews.fulfilled,
+          loadUsersPosts.fulfilled,
+          createPost.fulfilled
+        ),
         (state, action) => {
           state.loading = false
           state.success = true
