@@ -8,9 +8,8 @@ const PostForm = () => {
   const user = useSelector(selectUser)
   const titleRef = useRef()
   const descRef = useRef()
-  const imageRef = useRef()
   const dispatch = useDispatch()
-  const [imgPreview, setImgPreview] = useState()
+  const [imgPreview, setImgPreview] = useState(null)
   const [inputState, setInputState] = useState(false)
 
   const handleSubmit = e => {
@@ -18,7 +17,7 @@ const PostForm = () => {
 
     const title = titleRef.current.value
     const description = descRef.current.value
-    const image = imageRef.current.value
+    const image = imgPreview
     const source = `${user.userData.firstName} ${user.userData.lastName}`
     const logo = null //user.userData.avatar
     const publishedAt = Date.now()
@@ -57,14 +56,15 @@ const PostForm = () => {
     >
       <div className='flex gap-2'>
         <input
+          required
           type='text'
           ref={titleRef}
           placeholder={`${
             user.userData ? user.userData.firstName : 'Loading...'
           }, tell us something new...`}
-          className='flex-1 rounded-full bg-gray-200 px-6 py-1 text-lg font-medium outline-none
-        placeholder:text-gray-400 focus:bg-gray-300'
           onChange={handleInputChange}
+          className='flex-1 rounded-full bg-gray-200 px-6 py-1 text-lg font-medium outline-none
+          placeholder:text-gray-400 focus:bg-gray-300'
         />
         <div>
           <label
@@ -81,7 +81,6 @@ const PostForm = () => {
             type='file'
             accept='image/png, image/gif, image/jpeg'
             id='photo'
-            ref={imageRef}
             className='hidden'
             onChange={handleImgChange}
           />
