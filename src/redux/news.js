@@ -5,7 +5,7 @@ import {
   nanoid,
 } from '@reduxjs/toolkit'
 import { database, storage } from '../firebase/firebase'
-import { ref, set, get } from 'firebase/database'
+import { ref, set, get, child } from 'firebase/database'
 import { getDownloadURL, ref as sRef, uploadBytes } from 'firebase/storage'
 
 const initialState = {
@@ -79,15 +79,18 @@ const createPost = createAsyncThunk('news/createPost', async postData => {
   }
 })
 
+const likePost = createAsyncThunk('news/likePost', async data => {
+  const { postId, uid } = data
+  const snapshot = await get(ref(database, 'posts/' + postId + 'likeCount'))
+
+  set(ref(database, 'postsLikes/' + postId), { [uid]: true })
+  set(child(ref(database, 'posts/' + postId), 'likeCount'), snapshot.val() + 1)
+})
+
 const newsSlice = createSlice({
   name: 'news',
   initialState,
-  reducers: {
-    likePost(state, action) {
-      const { postId, uid } = action.payload
-      set(ref(database, 'postsLikes/' + postId), { [uid]: true })
-    },
-  },
+  reducers: {},
   extraReducers(builder) {
     builder
       .addCase(createPost.fulfilled, (state, action) => {
@@ -125,8 +128,6 @@ const newsSlice = createSlice({
 
 export const selectNews = state => state.news
 
-export { getNews, loadUsersPosts, createPost }
-
-export const { likePost } = newsSlice.actions
+export { getNews, loadUsersPosts, createPost, likePost }
 
 export default newsSlice.reducer
