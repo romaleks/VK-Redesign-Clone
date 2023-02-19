@@ -63,6 +63,9 @@ const Home = () => {
                       image={post.urlToImage}
                       articleSrc={post.url}
                       verified={post.verified}
+                      likeCount={post.likeCount}
+                      postId={post.postId}
+                      uid={post.uid}
                     />
                   ))}
               </>

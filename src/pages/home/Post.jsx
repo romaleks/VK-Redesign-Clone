@@ -1,3 +1,5 @@
+import { useDispatch } from 'react-redux'
+import { likePost } from '../../redux/news'
 import ReactionBtn from '../../components/ui/ReactionBtn'
 import icons from '../../data/icons'
 import logos from '../../data/logos'
@@ -13,9 +15,18 @@ const Post = ({
   timeAgo,
   verified,
   articleSrc,
+  likeCount,
+  postId,
+  uid,
 }) => {
+  const dispatch = useDispatch()
+
   const onImageError = e => {
     e.target.src = noImage
+  }
+
+  const handleLike = () => {
+    dispatch(likePost({ postId, uid }))
   }
 
   return (
@@ -54,7 +65,7 @@ const Post = ({
       <div className='flex items-center justify-between gap-3'>
         {!verified ? (
           <>
-            <ReactionBtn icon='like' />
+            <ReactionBtn onClick={handleLike} icon='like' count={likeCount} />
             <ReactionBtn icon='comment' />
             <ReactionBtn icon='share' />
             <div className='flex-1'></div>

@@ -51,6 +51,7 @@ const createPost = createAsyncThunk('news/createPost', async postData => {
   }
 
   set(ref(database, 'posts/' + postId), {
+    postId,
     uid,
     title,
     description,
@@ -60,9 +61,11 @@ const createPost = createAsyncThunk('news/createPost', async postData => {
     source: {
       name: source,
     },
+    likeCount: 0,
   })
 
   return {
+    postId,
     uid,
     title,
     description,
@@ -72,13 +75,19 @@ const createPost = createAsyncThunk('news/createPost', async postData => {
     source: {
       name: source,
     },
+    likeCount: 0,
   }
 })
 
 const newsSlice = createSlice({
   name: 'news',
   initialState,
-  reducers: {},
+  reducers: {
+    likePost(state, action) {
+      const { postId, uid } = action.payload
+      set(ref(database, 'postsLikes/' + postId), { [uid]: true })
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(createPost.fulfilled, (state, action) => {
@@ -117,5 +126,7 @@ const newsSlice = createSlice({
 export const selectNews = state => state.news
 
 export { getNews, loadUsersPosts, createPost }
+
+export const { likePost } = newsSlice.actions
 
 export default newsSlice.reducer
