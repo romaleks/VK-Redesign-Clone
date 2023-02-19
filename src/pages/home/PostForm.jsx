@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { selectUser } from '../../redux/user'
 import { useEffect, useRef, useState } from 'react'
 import { createPost, selectNews } from '../../redux/news'
-import { Spin } from 'antd'
+import { notification, Spin } from 'antd'
 import { LoadingOutlined } from '@ant-design/icons'
 import icons from '../../data/icons'
 
@@ -17,6 +17,16 @@ const PostForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault()
+
+    if (!titleRef.current.value) {
+      notification.error({
+        message: 'Error!',
+        description: 'Please write any title to the post.',
+        placement: 'top',
+        duration: 3,
+      })
+      return
+    }
 
     const title = titleRef.current.value
     const description = descRef.current.value
@@ -63,12 +73,12 @@ const PostForm = () => {
 
   return (
     <form
+      action=''
       onSubmit={handleSubmit}
       className='group flex flex-col gap-2 rounded-lg border border-gray-300 px-4 py-2'
     >
       <div className='flex gap-2'>
         <input
-          required
           type='text'
           ref={titleRef}
           placeholder={`${
@@ -100,7 +110,8 @@ const PostForm = () => {
         <div className='cursor-pointer rounded-lg bg-gray-200 p-1 duration-75 hover:bg-gray-300'>
           <img src={icons.music} alt='music' className='h-8 w-8' />
         </div>
-        <div
+        <button
+          id='myForm'
           onClick={handleSubmit}
           className='cursor-pointer rounded-lg bg-gray-200 p-1 duration-75 hover:bg-gray-300'
         >
@@ -112,7 +123,7 @@ const PostForm = () => {
           ) : (
             <img src={icons.send} alt='send' className='h-8' />
           )}
-        </div>
+        </button>
       </div>
       <div
         className='hidden group-focus-within:block'
