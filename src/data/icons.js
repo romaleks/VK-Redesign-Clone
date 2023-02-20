@@ -14,6 +14,7 @@ import bell from '../assets/svgs/bell.svg'
 import comment from '../assets/svgs/comment.svg'
 import fire from '../assets/svgs/fire.svg'
 import like from '../assets/svgs/like.svg'
+import active_like from '../assets/svgs/active_like.svg'
 import share from '../assets/svgs/share.svg'
 import search from '../assets/svgs/search.svg'
 import link from '../assets/svgs/link.svg'
@@ -36,6 +37,7 @@ export default {
   comment,
   fire,
   like,
+  active_like: active_like,
   share,
   search,
   link,

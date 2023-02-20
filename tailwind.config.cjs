@@ -19,6 +19,9 @@ module.exports = {
           200: '#e8eaed',
           300: '#e2e5e9',
         },
+        red: {
+          300: '#fae8e8',
+        },
       },
       maxWidth: {
         '7xl': '1600px',

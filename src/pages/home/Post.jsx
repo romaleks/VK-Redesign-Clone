@@ -1,3 +1,6 @@
+import { useEffect } from 'react'
+import { get, ref } from 'firebase/database'
+import { database } from '../../firebase/firebase'
 import { useDispatch } from 'react-redux'
 import { likePost, dislikePost } from '../../redux/news'
 import ReactionBtn from '../../components/ui/ReactionBtn'
@@ -19,6 +22,7 @@ const Post = ({
   postId,
   uid,
 }) => {
+  let isLiked
   const dispatch = useDispatch()
 
   const onImageError = e => {
