@@ -48,15 +48,6 @@ const PostForm = () => {
     )
   }
 
-  useEffect(() => {
-    if (news.success) {
-      titleRef.current.value = ''
-      descRef.current.value = ''
-      setImgPreview(null)
-      setInputState(false)
-    }
-  }, [news.success])
-
   const handleImgChange = e => {
     const image = e.target.files[0]
     setInputState(true)
@@ -70,6 +61,16 @@ const PostForm = () => {
       setInputState(false)
     }
   }
+
+  useEffect(() => {
+    if (news.success) {
+      titleRef.current.value = ''
+      descRef.current.value = ''
+      titleRef.current.blur()
+      setImgPreview(null)
+      setInputState(false)
+    }
+  }, [news.success])
 
   return (
     <form
