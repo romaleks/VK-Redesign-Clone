@@ -41,7 +41,7 @@ const Home = () => {
           <LeftSidebar />
           <div className='flex flex-1 flex-col gap-4'>
             {user.loading ? <PostFormLoad /> : <PostForm />}
-            {news.loading || !news.success ? (
+            {news.loading || user.loading ? (
               <>
                 <PostLoad />
                 <PostLoad />

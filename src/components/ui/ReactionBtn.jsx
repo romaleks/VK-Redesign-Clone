@@ -9,8 +9,8 @@ const ReactionBtn = ({
   count,
   likePost,
   dislikePost,
-  uid,
   postId,
+  uid,
 }) => {
   const [curCount, setCurCount] = useState(count)
   const [likeStatus, setLikeStatus] = useState(null)

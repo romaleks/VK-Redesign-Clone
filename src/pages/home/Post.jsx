@@ -1,13 +1,14 @@
 import { useEffect } from 'react'
 import { get, ref } from 'firebase/database'
 import { database } from '../../firebase/firebase'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { likePost, dislikePost } from '../../redux/news'
 import ReactionBtn from '../../components/ui/ReactionBtn'
 import icons from '../../data/icons'
 import logos from '../../data/logos'
 import moment from 'moment/moment'
 import noImage from '../../assets/imgs/no-image.png'
+import { selectUser } from '../../redux/user'
 
 const Post = ({
   source,
@@ -22,19 +23,20 @@ const Post = ({
   postId,
   uid,
 }) => {
-  let isLiked
   const dispatch = useDispatch()
+  const user = useSelector(selectUser)
+  const currentUId = user.userData.userId
 
   const onImageError = e => {
     e.target.src = noImage
   }
 
   const handleLike = () => {
-    dispatch(likePost({ postId, uid }))
+    dispatch(likePost({ postId, uid: currentUId }))
   }
 
   const handleDislike = () => {
-    dispatch(dislikePost({ postId, uid }))
+    dispatch(dislikePost({ postId, uid: currentUId }))
   }
 
   return (
@@ -79,8 +81,8 @@ const Post = ({
               dislikePost={handleDislike}
               icon='like'
               count={likeCount}
-              uid={uid}
               postId={postId}
+              uid={currentUId}
             />
             <ReactionBtn icon='comment' />
             <ReactionBtn icon='share' />
