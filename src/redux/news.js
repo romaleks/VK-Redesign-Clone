@@ -81,10 +81,18 @@ const createPost = createAsyncThunk('news/createPost', async postData => {
 
 const likePost = createAsyncThunk('news/likePost', async data => {
   const { postId, uid } = data
-  const snapshot = await get(ref(database, 'posts/' + postId + 'likeCount'))
+  const snapshot = await get(ref(database, `posts/${postId}/likeCount`))
 
   set(ref(database, 'postsLikes/' + postId), { [uid]: true })
   set(child(ref(database, 'posts/' + postId), 'likeCount'), snapshot.val() + 1)
+})
+
+const dislikePost = createAsyncThunk('news/dislikePost', async data => {
+  const { postId, uid } = data
+  const snapshot = await get(ref(database, `posts/${postId}/likeCount`))
+
+  set(ref(database, 'postsLikes/' + postId), { [uid]: false })
+  set(child(ref(database, 'posts/' + postId), 'likeCount'), snapshot.val() - 1)
 })
 
 const newsSlice = createSlice({
@@ -128,6 +136,6 @@ const newsSlice = createSlice({
 
 export const selectNews = state => state.news
 
-export { getNews, loadUsersPosts, createPost, likePost }
+export { getNews, loadUsersPosts, createPost, likePost, dislikePost }
 
 export default newsSlice.reducer
