@@ -65,7 +65,6 @@ const Home = () => {
                       verified={post.verified}
                       likeCount={post.likeCount}
                       postId={post.postId}
-                      uid={post.uid}
                     />
                   ))}
               </>

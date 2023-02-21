@@ -21,7 +21,6 @@ const Post = ({
   articleSrc,
   likeCount,
   postId,
-  uid,
 }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectUser)
@@ -62,7 +61,12 @@ const Post = ({
       </div>
       <div className='flex flex-col gap-3'>
         <h3 className='text-lg font-bold'>{title}</h3>
-        {description ? <p className='font-medium'>{description}</p> : null}
+        {description ? (
+          <p
+            className='font-medium '
+            dangerouslySetInnerHTML={{ __html: description }}
+          ></p>
+        ) : null}
         <div className='h-full'>
           <img
             src={image ? image : noImage}
