@@ -10,7 +10,7 @@ import {
 
 function App() {
   return (
-    <Router>
+    <Router basename='/VK-Redesign-Clone'>
       <Routes>
         <Route path='/' element={<Navigate to='/signin' />} />
         <Route path='/home' element={<Home />} />
