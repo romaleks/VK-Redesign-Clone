@@ -63,7 +63,7 @@ const Post = ({
         <h3 className='text-lg font-bold'>{title}</h3>
         {description ? (
           <p
-            className='font-medium '
+            className='font-medium [&>a]:font-bold [&>a]:text-blue-400 hover:[&>a]:underline'
             dangerouslySetInnerHTML={{ __html: description }}
           ></p>
         ) : null}
