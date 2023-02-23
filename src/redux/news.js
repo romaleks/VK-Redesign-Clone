@@ -16,21 +16,35 @@ const initialState = {
   numOfPosts: {},
 }
 
-const API_KEY = '0e232cb77ea54f3295e541bbe4f9965e'
-const getNews = createAsyncThunk('news/getNews', async keyWord => {
+const API_KEY = 'ae2d77659ed463011c6d6d14066ec008'
+const getNews = createAsyncThunk('news/getNews', async keyWords => {
   const response = await fetch(
-    `https://newsapi.org/v2/top-headlines?q=${keyWord}&sortBy=publishedAt&pageSize=3&apiKey=${API_KEY}`
+    `https://gnews.io/api/v4/search?q=${keyWords.join(
+      ' OR '
+    )}&lang=en&country=us&max=10&apikey=${API_KEY}`
   )
   const data = await response.json()
+  console.log(data)
+
+  const numOfPosts = {}
+  keyWords.forEach(keyWord => (numOfPosts[keyWord] = 0))
 
   for (const article of data.articles) {
-    article.keyWord = keyWord
+    keyWords.forEach(keyWord => {
+      if (
+        article.title.includes(keyWord) ||
+        article.description.includes(keyWord)
+      ) {
+        article.keyWord = keyWord
+        numOfPosts[keyWord] += 1
+      }
+    })
     article.verified = true
   }
 
-  const numOfPosts = data.articles.length
-  data.keyWord = keyWord
   data.numOfPosts = numOfPosts
+
+  console.log(numOfPosts)
   return data
 })
 
@@ -41,13 +55,14 @@ const loadUsersPosts = createAsyncThunk('news/loadUsersPosts', async () => {
 
 const createPost = createAsyncThunk('news/createPost', async postData => {
   const postId = nanoid()
-  const { uid, title, description, source, image, logo, publishedAt } = postData
-  let urlToImage = null
+  const { uid, title, description, source, imageRef, logo, publishedAt } =
+    postData
+  let image = null
 
-  if (image) {
+  if (imageRef) {
     const storageRef = sRef(storage, 'postsImages/' + postId)
-    const response = await uploadBytes(storageRef, image)
-    urlToImage = await getDownloadURL(response.ref)
+    const response = await uploadBytes(storageRef, imageRef)
+    image = await getDownloadURL(response.ref)
   }
 
   set(ref(database, 'posts/' + postId), {
@@ -56,7 +71,7 @@ const createPost = createAsyncThunk('news/createPost', async postData => {
     title,
     description,
     logo,
-    urlToImage,
+    image,
     publishedAt,
     source: {
       name: source,
@@ -70,7 +85,7 @@ const createPost = createAsyncThunk('news/createPost', async postData => {
     title,
     description,
     logo,
-    urlToImage,
+    image,
     publishedAt,
     source: {
       name: source,
@@ -106,7 +121,7 @@ const newsSlice = createSlice({
       })
       .addCase(getNews.fulfilled, (state, action) => {
         state.posts.push(...action.payload.articles)
-        state.numOfPosts[action.payload.keyWord] = action.payload.numOfPosts
+        state.numOfPosts = action.payload.numOfPosts
       })
       .addCase(loadUsersPosts.fulfilled, (state, action) => {
         for (const post in action.payload) {

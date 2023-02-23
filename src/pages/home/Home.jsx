@@ -3,7 +3,7 @@ import LeftSidebar from '../../components/LeftSidebar'
 import RightSidebar from '../../components/RightSidebar'
 import PostForm from './PostForm'
 import Post from './Post'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { selectUser, saveData } from '../../redux/user'
 import { useDispatch, useSelector } from 'react-redux'
 import { auth } from '../../firebase/firebase'
@@ -26,10 +26,7 @@ const Home = () => {
       }
     })
 
-    dispatch(getNews('Tesla'))
-    dispatch(getNews('Apple'))
-    dispatch(getNews('Amazon'))
-    dispatch(getNews('BBC'))
+    dispatch(getNews(['Tesla', 'Apple', 'Amazon', 'BBC']))
     dispatch(loadUsersPosts())
   }, [])
 
@@ -60,7 +57,7 @@ const Home = () => {
                       description={post.description}
                       logo={post.keyWord}
                       timeAgo={post.publishedAt}
-                      image={post.urlToImage}
+                      image={post.image}
                       articleSrc={post.url}
                       verified={post.verified}
                       likeCount={post.likeCount}

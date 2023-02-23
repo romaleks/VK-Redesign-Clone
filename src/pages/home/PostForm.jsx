@@ -30,7 +30,7 @@ const PostForm = () => {
 
     const title = titleRef.current.value
     const description = descRef.current.value
-    const image = imgPreview
+    const imageRef = imgPreview
     const source = `${user.userData.firstName} ${user.userData.lastName}`
     const logo = null //user.userData.avatar
     const publishedAt = Date.now()
@@ -41,7 +41,7 @@ const PostForm = () => {
         title,
         description,
         source,
-        image,
+        imageRef,
         logo,
         publishedAt,
       })
