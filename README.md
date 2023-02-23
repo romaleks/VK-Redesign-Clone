@@ -7,12 +7,12 @@ This project is a part of the "The Odin Project" [curriculum](https://www.theodi
 ## Table of Contents
 
 - [Overview](#overview)
-  - [Screenshot](#screenshot)
+  - [Screenshots](#screenshots)
   - [Links](#links)
-- [About](#my-process)
+- [About](#about)
   - [Features](#features)
   - [Roadmap](#roadmap)
-- [Build with](#build-with)
+- [Built with](#built-with)
 
 ## Overview
 
@@ -20,7 +20,7 @@ This project is a part of the "The Odin Project" [curriculum](https://www.theodi
 
 ![App Screenshot](./public/preview1.png)
 
-![App Screenshot](./public/preview1.png)
+![App Screenshot](./public/preview2.png)
 
 ### Links
 
