@@ -24,7 +24,6 @@ const getNews = createAsyncThunk('news/getNews', async keyWords => {
     )}&lang=en&country=us&max=10&apikey=${API_KEY}`
   )
   const data = await response.json()
-  console.log(data)
 
   const numOfPosts = {}
   keyWords.forEach(keyWord => (numOfPosts[keyWord] = 0))
@@ -43,8 +42,6 @@ const getNews = createAsyncThunk('news/getNews', async keyWords => {
   }
 
   data.numOfPosts = numOfPosts
-
-  console.log(numOfPosts)
   return data
 })
 
